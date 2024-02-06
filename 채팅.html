@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>오픈 채팅방</title>
+    <style>
+        .chat-container {
+            width: 400px;
+            height: 500px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        .chat-messages {
+            height: 400px;
+            overflow-y: scroll;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+
+        .chat-input {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        .send-button {
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-messages">
+            <!-- 채팅 메시지가 표시될 부분 -->
+        </div>
+        <input type="text" class="author-input" placeholder="작성자를 입력하세요">
+        <input type="text" class="content-input" placeholder="내용을 입력하세요">
+        <button class="send-button">전송</button>
+    </div>
+
+    <script>
+        var previousAuthor = ''; // 이전 작성자 정보를 저장할 변수
+
+        document.querySelector('.send-button').addEventListener('click', function() {
+            var authorInput = document.querySelector('.author-input');
+            var contentInput = document.querySelector('.content-input');
+            var author = authorInput.value.trim(); // 작성자 정보 입력값
+            var content = contentInput.value.trim(); // 내용 입력값
+
+            // 이전 작성자 정보가 없는 경우, 현재 입력값을 이전 작성자로 저장
+            if (!previousAuthor && author) {
+                previousAuthor = author;
+            }
+
+            // 이전 작성자 정보를 사용하여 메시지 작성
+            var message = previousAuthor ? previousAuthor + ': ' : '';
+            message += content;
+
+            // 메시지 전송 처리 로직 추가
+            var chatMessages = document.querySelector('.chat-messages');
+            var newMessage = document.createElement('div');
+            newMessage.textContent = message;
+            chatMessages.appendChild(newMessage);
+
+            authorInput.value = ''; // 작성자 입력 필드 초기화
+            contentInput.value = ''; // 내용 입력 필드 초기화
+        });
+
+        document.querySelector('.content-input').addEventListener('keypress', function(event) {
+            if (event.keyCode === 13) {
+                var authorInput = document.querySelector('.author-input');
+                var contentInput = document.querySelector('.content-input');
+                var author = authorInput.value.trim(); // 작성자 정보 입력값
+                var content = contentInput.value.trim(); // 내용 입력값
+
+                // 이전 작성자 정보가 없는 경우, 현재 입력값을 이전 작성자로 저장
+                if (!previousAuthor && author) {
+                    previousAuthor = author;
+                }
+
+                // 이전 작성자 정보를 사용하여 메시지 작성
+                var message = previousAuthor ? previousAuthor + ': ' : '';
+                message += content;
+
+                // 메시지 전송 처리 로직 추가
+                var chatMessages = document.querySelector('.chat-messages');
+                var newMessage = document.createElement('div');
+                newMessage.textContent = message;
+                chatMessages.appendChild(newMessage);
+
+                authorInput.value = ''; // 작성자 입력 필드 초기화
+                contentInput.value = ''; // 내용 입력 필드 초기화
+            }
+        });
+    </script>
+</body>
+</html>
