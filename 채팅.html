@@ -3,15 +3,26 @@
 <head>
     <title>오픈 채팅방</title>
     <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
         .chat-container {
-            width: 400px;
-            height: 500px;
-            border: 1px solid #ccc;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             padding: 10px;
         }
 
         .chat-messages {
-            height: 400px;
+            flex: 1;
+            width: 100%;
+            max-height: 80%;
             overflow-y: scroll;
             border: 1px solid #ccc;
             margin-bottom: 10px;
@@ -48,8 +59,14 @@
             var author = authorInput.value.trim(); // 작성자 정보 입력값
             var content = contentInput.value.trim(); // 내용 입력값
 
-            // 이전 작성자 정보가 없는 경우, 현재 입력값을 이전 작성자로 저장
-            if (!previousAuthor && author) {
+            // 내용 입력란이 비어있을 경우 경고창 표시
+            if (content === '') {
+                alert('내용을 입력하시오');
+                return; // 함수 종료
+            }
+
+            // 현재 작성자와 이전 작성자가 다를 경우, 현재 입력값을 이전 작성자로 저장
+            if (author !== previousAuthor && author) {
                 previousAuthor = author;
             }
 
@@ -74,8 +91,14 @@
                 var author = authorInput.value.trim(); // 작성자 정보 입력값
                 var content = contentInput.value.trim(); // 내용 입력값
 
-                // 이전 작성자 정보가 없는 경우, 현재 입력값을 이전 작성자로 저장
-                if (!previousAuthor && author) {
+                // 내용 입력란이 비어있을 경우 경고창 표시
+                if (content === '') {
+                    alert('내용을 입력하시오');
+                    return; // 함수 종료
+                }
+
+                // 현재 작성자와 이전 작성자가 다를 경우, 현재 입력값을 이전 작성자로 저장
+                if (author !== previousAuthor && author) {
                     previousAuthor = author;
                 }
 
